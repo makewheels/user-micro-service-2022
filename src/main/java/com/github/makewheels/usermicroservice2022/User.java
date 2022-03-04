@@ -11,8 +11,8 @@ public class User {
     private String id;
 
     private String showId;
+    private String phone;
     private Date createTime;
 
-    private String phone;
-    private String registerMethod;
+    private String token;
 }

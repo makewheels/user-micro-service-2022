@@ -1,16 +1,18 @@
 package com.github.makewheels.usermicroservice2022;
 
+import com.alibaba.fastjson.JSON;
 import com.baidubce.auth.DefaultBceCredentials;
 import com.baidubce.services.sms.SmsClient;
 import com.baidubce.services.sms.SmsClientConfiguration;
 import com.baidubce.services.sms.model.SendMessageV3Request;
 import com.baidubce.services.sms.model.SendMessageV3Response;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class BaiduSmsService {
     private SmsClient client;
 
@@ -37,17 +39,11 @@ public class BaiduSmsService {
         SendMessageV3Request request = new SendMessageV3Request();
         request.setMobile(phone);
         request.setSignatureId("sms-sign-QeEHQe10478");
-        request.setTemplate("sms-tmpl-jNoSoH22361");
+        request.setTemplate("sms-tmpl-HNbGLw26882");
         request.setContentVar(contentVar);
-        return getClient().sendMessage(request);
+        SendMessageV3Response sendMessageV3Response = getClient().sendMessage(request);
+        log.info(JSON.toJSONString(sendMessageV3Response));
+        return sendMessageV3Response;
     }
 
-    public static void main(String[] args) {
-        BaiduSmsService baiduSmsService = new BaiduSmsService();
-        Map<String, String> map = new HashMap<>();
-        map.put("code", "大庆，18-22");
-        SendMessageV3Response sendMessageV3Response =
-                baiduSmsService.sendVerificationCode("18603672365", map);
-        System.out.println(sendMessageV3Response);
-    }
 }

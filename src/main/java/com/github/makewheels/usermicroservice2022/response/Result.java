@@ -1,4 +1,4 @@
-package com.github.makewheels.usermicroservice2022;
+package com.github.makewheels.usermicroservice2022.response;
 
 import lombok.Data;
 

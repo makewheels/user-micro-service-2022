@@ -1,5 +1,6 @@
 package com.github.makewheels.usermicroservice2022;
 
+import com.github.makewheels.usermicroservice2022.response.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,13 +16,11 @@ public class UserController {
 
     @GetMapping("requestVerificationCode")
     public Result<Void> requestVerificationCode(@RequestParam String phone) {
-        //如果redis里已经有了，直接返回
-        //如果redis里没有，发验证码，放redis里，返回
-        return Result.ok();
+        return userService.requestVerificationCode(phone);
     }
 
-    public void submitVerificationCode() {
-        //根据requestId找
-
+    @GetMapping("submitVerificationCode")
+    public Result<User> submitVerificationCode(@RequestParam String phone, @RequestParam String code) {
+        return userService.submitVerificationCode(phone, code);
     }
 }
