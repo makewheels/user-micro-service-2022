@@ -78,19 +78,19 @@ public class UserService {
         return Result.ok(user);
     }
 
-    public Result<Void> authToken(String token) {
+    public Result<User> getUserByToken(String token) {
         //先看redis有没有
         User user = userRedisService.getUserByToken(token);
         //如果redis已经有了，返回ok
         if (user != null) {
-            return Result.ok();
+            return Result.ok(user);
         }
         //如果redis没有，查数据库
         user = userRepository.getByToken(token);
         //如果mongo有，缓存redis，返回ok
         if (user != null) {
             userRedisService.setUserByToken(user);
-            return Result.ok();
+            return Result.ok(user);
         }
         //mongo也没有，那这时候它需要重新登录了
         //TODO 其实这里还有个问题，网页和app同时登陆
@@ -99,6 +99,9 @@ public class UserService {
 
     public Result<User> getUserById(String userId) {
         User user = mongoTemplate.findById(userId, User.class);
+        if (user != null) {
+            user.setToken(null);
+        }
         return Result.ok(user);
     }
 }

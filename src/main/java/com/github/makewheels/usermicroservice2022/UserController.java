@@ -24,9 +24,9 @@ public class UserController {
         return userService.submitVerificationCode(phone, code);
     }
 
-    @GetMapping("authToken")
-    public Result<Void> authToken(@RequestParam String token) {
-        return userService.authToken(token);
+    @GetMapping("getUserByToken")
+    public Result<User> getUserByToken(@RequestParam String token) {
+        return userService.getUserByToken(token);
     }
 
     @GetMapping("getUserById")
