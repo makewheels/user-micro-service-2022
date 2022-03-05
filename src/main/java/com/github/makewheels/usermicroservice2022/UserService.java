@@ -2,7 +2,7 @@ package com.github.makewheels.usermicroservice2022;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.github.makewheels.usermicroservice2022.redis.RedisService;
+import com.alibaba.fastjson.JSON;
 import com.github.makewheels.usermicroservice2022.redis.UserRedisService;
 import com.github.makewheels.usermicroservice2022.response.ErrorCode;
 import com.github.makewheels.usermicroservice2022.response.Result;
@@ -59,17 +59,46 @@ public class UserService {
         //干掉Redis
         userRedisService.delVerificationCode(phone);
         //先查询用户
-        User user = userRepository.getUserByPhone(phone);
+        User user = userRepository.getByPhone(phone);
         //不存在，创建新用户
         if (user == null) {
             user = new User();
-            user.setShowId(IdUtil.getSnowflake().nextIdStr());
             user.setPhone(phone);
             user.setCreateTime(new Date());
+            log.info("创建新用户");
         }
-        //刷新token，保存或更新用户
+        //刷新token
+        userRedisService.delUserByToken(user.getToken());
         user.setToken(IdUtil.randomUUID());
+        //保存或更新用户
         mongoTemplate.save(user);
+        //登陆信息存入redis
+        userRedisService.setUserByToken(user);
+        log.info(JSON.toJSONString(user));
+        return Result.ok(user);
+    }
+
+    public Result<Void> authToken(String token) {
+        //先看redis有没有
+        User user = userRedisService.getUserByToken(token);
+        //如果redis已经有了，返回ok
+        if (user != null) {
+            return Result.ok();
+        }
+        //如果redis没有，查数据库
+        user = userRepository.getByToken(token);
+        //如果mongo有，缓存redis，返回ok
+        if (user != null) {
+            userRedisService.setUserByToken(user);
+            return Result.ok();
+        }
+        //mongo也没有，那这时候它需要重新登录了
+        //TODO 其实这里还有个问题，网页和app同时登陆
+        return Result.error(ErrorCode.CHECK_TOKEN_ERROR);
+    }
+
+    public Result<User> getUserById(String userId) {
+        User user = mongoTemplate.findById(userId, User.class);
         return Result.ok(user);
     }
 }

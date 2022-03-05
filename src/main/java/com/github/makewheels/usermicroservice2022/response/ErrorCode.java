@@ -9,7 +9,7 @@ public enum ErrorCode {
 
     //用户相关
     NEED_LOGIN(1000, "请先登录"),
-    CHECK_LOGIN_TOKEN_ERROR(1001, "检查loginToken错误"),
+    CHECK_TOKEN_ERROR(1001, "检查登录token错误"),
     REGISTER_LOGIN_NAME_ALREADY_EXISTS(1002, "登录名已存在"),
     LOGIN_LOGIN_NAME_PASSWORD_WRONG(1003, "用户名或密码错误"),
     SEARCH_USER_LOGIN_NAME_NOT_EXIST(1004, "搜索登录名不存在"),

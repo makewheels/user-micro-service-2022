@@ -1,6 +1,7 @@
 package com.github.makewheels.usermicroservice2022.redis;
 
 import com.alibaba.fastjson.JSON;
+import com.github.makewheels.usermicroservice2022.User;
 import com.github.makewheels.usermicroservice2022.VerificationCode;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +30,17 @@ public class UserRedisService {
         redisService.del(RedisKey.verificationCode(phone));
     }
 
+    public User getUserByToken(String token) {
+        String json = (String) redisService.get(RedisKey.token(token));
+        return JSON.parseObject(json, User.class);
+    }
+
+    public void setUserByToken(User user) {
+        redisService.set(RedisKey.token(user.getToken()),
+                JSON.toJSONString(user), RedisTime.THIRTY_MINUTES);
+    }
+
+    public void delUserByToken(String token){
+        redisService.del(RedisKey.token(token));
+    }
 }

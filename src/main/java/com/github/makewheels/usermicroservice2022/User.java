@@ -2,17 +2,22 @@ package com.github.makewheels.usermicroservice2022;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Data
+@Document
 public class User {
     @Id
     private String id;
 
-    private String showId;
+    @Indexed
     private String phone;
+    @Indexed
     private Date createTime;
 
+    @Indexed
     private String token;
 }

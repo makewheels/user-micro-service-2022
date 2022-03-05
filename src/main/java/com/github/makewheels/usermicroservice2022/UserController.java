@@ -23,4 +23,14 @@ public class UserController {
     public Result<User> submitVerificationCode(@RequestParam String phone, @RequestParam String code) {
         return userService.submitVerificationCode(phone, code);
     }
+
+    @GetMapping("authToken")
+    public Result<Void> authToken(@RequestParam String token) {
+        return userService.authToken(token);
+    }
+
+    @GetMapping("getUserById")
+    public Result<User> getUserById(@RequestParam String userId) {
+        return userService.getUserById(userId);
+    }
 }

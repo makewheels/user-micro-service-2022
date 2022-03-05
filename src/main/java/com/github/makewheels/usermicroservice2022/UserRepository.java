@@ -13,8 +13,13 @@ public class UserRepository {
     @Resource
     private MongoTemplate mongoTemplate;
 
-    public User getUserByPhone(String phone) {
+    public User getByPhone(String phone) {
         Query query = Query.query(Criteria.where("phone").is(phone));
+        return mongoTemplate.findOne(query, User.class);
+    }
+
+    public User getByToken(String token) {
+        Query query = Query.query(Criteria.where("token").is(token));
         return mongoTemplate.findOne(query, User.class);
     }
 }
