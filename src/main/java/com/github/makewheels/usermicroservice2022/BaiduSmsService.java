@@ -22,7 +22,7 @@ public class BaiduSmsService {
             String AccessKeySecret = "b37684274a394dcbacf594f52d881b1d";
             SmsClientConfiguration config = new SmsClientConfiguration();
             config.setCredentials(new DefaultBceCredentials(AccessKeyID, AccessKeySecret));
-            config.setEndpoint("http://smsv3.bj.baidubce.com");
+            config.setEndpoint("https://smsv3.bj.baidubce.com");
             client = new SmsClient(config);
         }
         return client;
