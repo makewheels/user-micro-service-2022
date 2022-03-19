@@ -18,10 +18,10 @@ public class BaiduSmsService {
 
     private SmsClient getClient() {
         if (client == null) {
-            String AccessKeyID = "2878b713e97c4dd784d07fb41f5bbb5f";
-            String AccessKeySecret = "b37684274a394dcbacf594f52d881b1d";
+            String accessKeyId = "1439904c0a4b4eb1ae0646ce54ff0d64";
+            String secretKey = "0c30a09344654c8b9fbdd6ff879d3cff";
             SmsClientConfiguration config = new SmsClientConfiguration();
-            config.setCredentials(new DefaultBceCredentials(AccessKeyID, AccessKeySecret));
+            config.setCredentials(new DefaultBceCredentials(accessKeyId, secretKey));
             config.setEndpoint("https://smsv3.bj.baidubce.com");
             client = new SmsClient(config);
         }
