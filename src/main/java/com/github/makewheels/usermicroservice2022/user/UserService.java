@@ -1,9 +1,10 @@
-package com.github.makewheels.usermicroservice2022;
+package com.github.makewheels.usermicroservice2022.user;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
-import com.github.makewheels.usermicroservice2022.redis.UserRedisService;
+import com.github.makewheels.usermicroservice2022.BaiduSmsService;
+import com.github.makewheels.usermicroservice2022.VerificationCode;
 import com.github.makewheels.usermicroservice2022.response.ErrorCode;
 import com.github.makewheels.usermicroservice2022.response.Result;
 import lombok.extern.slf4j.Slf4j;

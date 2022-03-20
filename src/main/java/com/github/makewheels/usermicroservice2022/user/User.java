@@ -1,4 +1,4 @@
-package com.github.makewheels.usermicroservice2022;
+package com.github.makewheels.usermicroservice2022.user;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

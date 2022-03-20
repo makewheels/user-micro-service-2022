@@ -1,4 +1,4 @@
-package com.github.makewheels.usermicroservice2022;
+package com.github.makewheels.usermicroservice2022.user;
 
 import com.github.makewheels.usermicroservice2022.response.Result;
 import org.springframework.web.bind.annotation.GetMapping;
