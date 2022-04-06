@@ -1,6 +1,5 @@
 package com.github.makewheels.usermicroservice2022.user;
 
-import com.github.makewheels.usermicroservice2022.user.User;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;

@@ -70,6 +70,7 @@ public class UserService {
         }
         //刷新token
         userRedisService.delUserByToken(user.getToken());
+        //因为重新登录了所以设置新的token前端需要保存
         user.setToken(IdUtil.randomUUID());
         //保存或更新用户
         mongoTemplate.save(user);

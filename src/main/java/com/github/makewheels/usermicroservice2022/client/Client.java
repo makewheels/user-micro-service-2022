@@ -1,4 +1,4 @@
-package com.github.makewheels.usermicroservice2022.user;
+package com.github.makewheels.usermicroservice2022.client;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,16 +9,14 @@ import java.util.Date;
 
 @Data
 @Document
-public class User {
+public class Client {
     @Id
     private String id;
 
     @Indexed
-    private String phone;
-    @Indexed
     private Date createTime;
 
-    @Indexed
-    private String token;
+    private String userAgent;
+    private String ip;
 
 }
