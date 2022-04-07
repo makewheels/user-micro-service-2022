@@ -33,6 +33,7 @@ public class UserService {
         //如果redis里已经有了，直接返回
         VerificationCode verificationCode = userRedisService.getVerificationCode(phone);
         if (verificationCode != null) {
+            log.info("Redis已有，手机：{}，验证码：{}", verificationCode.getPhone(), verificationCode.getCode());
             return Result.ok();
         }
 
