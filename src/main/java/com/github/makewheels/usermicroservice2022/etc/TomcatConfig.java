@@ -24,7 +24,7 @@ public class TomcatConfig {
     public ServletWebServerFactory servletContainer() {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setPort(5021);
+        connector.setPort(5029);
         tomcat.addAdditionalTomcatConnectors(connector);
         return tomcat;
     }
