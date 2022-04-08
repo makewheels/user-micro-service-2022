@@ -7,19 +7,24 @@ import com.baidubce.services.sms.SmsClientConfiguration;
 import com.baidubce.services.sms.model.SendMessageV3Request;
 import com.baidubce.services.sms.model.SendMessageV3Response;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 @Service
 @Slf4j
 public class BaiduSmsService {
+    @Value("${baidu.sms.accessKeyId}")
+    private String accessKeyId;
+    @Value("${baidu.sms.secretKey}")
+    private String secretKey;
+
     private SmsClient client;
 
     private SmsClient getClient() {
         if (client == null) {
-            String accessKeyId = "1439904c0a4b4eb1ae0646ce54ff0d64";
-            String secretKey = "0c30a09344654c8b9fbdd6ff879d3cff";
             SmsClientConfiguration config = new SmsClientConfiguration();
             config.setCredentials(new DefaultBceCredentials(accessKeyId, secretKey));
             config.setEndpoint("https://smsv3.bj.baidubce.com");
